@@ -1,0 +1,8 @@
+@tailwind base;@tailwind components;@tailwind utilities;
+body{@apply bg-navy-900 text-slate-100;font-family:'Segoe UI',Tahoma,sans-serif}
+.card{@apply bg-navy-800 border border-cyan-900/40 rounded-lg p-4}
+.btn{@apply px-3 py-1.5 rounded bg-cyan-600 hover:bg-cyan-500 text-sm disabled:opacity-40}
+.btn2{@apply px-3 py-1.5 rounded border border-cyan-800 text-sm hover:bg-navy-700 disabled:opacity-40}
+.inp{@apply bg-navy-900 border border-cyan-900 rounded px-2 py-1.5 text-sm}
+th{@apply text-start text-slate-400 font-normal p-2 whitespace-nowrap}td{@apply p-2 border-t border-cyan-900/30}
+@media print{aside,header,.noprint{display:none!important}body{background:#fff;color:#000}.card{border-color:#999;background:#fff}}
