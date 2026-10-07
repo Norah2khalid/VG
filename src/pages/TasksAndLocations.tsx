@@ -29,7 +29,13 @@ return <>
 <label className="block text-sm">موقع التفتيش<select className="inp w-full" value={edit.locationId} onChange={e=>setEdit({...edit,locationId:e.target.value})}>{LOCATIONS.map(l=><option key={l.id} value={l.id}>{l.equipment} — {l.facility}</option>)}</select></label>
 <div className="grid grid-cols-2 gap-2"><label className="text-sm">المفتش<select className="inp w-full" value={edit.inspector} onChange={e=>setEdit({...edit,inspector:e.target.value})}>{INSPECTORS.map(i=><option key={i}>{i}</option>)}</select></label>
 <label className="text-sm">الأولوية<select className="inp w-full" value={edit.priority} onChange={e=>setEdit({...edit,priority:e.target.value as InspectionTask['priority']})}>{PRIORITIES.map(p=><option key={p}>{p}</option>)}</select></label>
-<label className="text-sm">الاستحقاق<input type="date" className="inp w-full" value={edit.due} onChange={e=>setEdit({...edit,due:e.target.value})}/></label>
+<label className="text-sm">الاستحقاق<input
+  type="date"
+  dir="ltr"
+  className="inp w-full"
+  value={edit.due}
+  onChange={e => setEdit({...edit, due:e.target.value})}
+/></label>
 <label className="text-sm">الحالة<select className="inp w-full" value={edit.status} onChange={e=>setEdit({...edit,status:e.target.value as InspectionTask['status']})}>{TASK_STATUSES.map(s=><option key={s}>{s}</option>)}</select></label></div>
 {err&&<p role="alert" className="text-red-300 text-sm">{err}</p>}<div className="flex gap-2"><button className="btn">حفظ</button><button type="button" className="btn2" onClick={()=>setEdit(null)}>إلغاء</button></div></form></div>}
-{conf&&cur&&<div role="alertdialog" aria-modal="true" className="fixed inset-0 z-50 bg-black/60 grid place-items-center"><div className="card space-y-3"><p>تأكيد إكمال التفتيش وإنشاء التقرير وحفظه في السجل؟</p><div className="flex gap-2"><button className="btn" onClick={()=>{completeInspection(cur.id);setConf(false)}}>تأكيد</button><button className="btn2" onClick={()=>setConf(false)}>رجوع</button></div></div></div>}</>}
+{conf&&cur&&<div role="alertdialog" aria-modal="true" className="fixed inset-0 z-50 bg-black/60 grid place-items-center"><div className="card space-y-3"><p>تأكيد إكمال التفتيش وإنشاء التقرير وحفظه في السجل？</p><div className="flex gap-2"><button className="btn" onClick={()=>{completeInspection(cur.id);setConf(false)}}>تأكيد</button><button className="btn2" onClick={()=>setConf(false)}>رجوع</button></div></div></div>}</>}
