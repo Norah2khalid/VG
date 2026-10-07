@@ -15,7 +15,7 @@ const INSPECTORS = [
   'خالد العتيبي',
   'أحمد الشمري',
   'سارة القحطاني',
-  'محمد الغامدي',
+  'فاطمة الغامدي',
 ];
 
 export default function ManagerDashboard() {
@@ -74,7 +74,7 @@ export default function ManagerDashboard() {
 
           <div>
             <h1 className="text-2xl font-bold">
-              واجهة مدير المفتشين
+              واجهة المدير 
             </h1>
 
             <p className="text-sm text-slate-400 mt-1">
@@ -140,7 +140,7 @@ export default function ManagerDashboard() {
               value={taskType}
               onChange={(e) => setTaskType(e.target.value)}
             >
-              <option>تفتيش دوري</option>
+              <option>تفتيش روتيني</option>
               <option>تفتيش متابعة</option>
               <option>تفتيش بسبب تنبيه</option>
               <option>تفتيش إضافي</option>

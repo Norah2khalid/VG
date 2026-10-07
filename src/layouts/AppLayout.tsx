@@ -22,6 +22,24 @@ const NAV = [
   { to: '/history', l: 'سجل التفتيش', i: Archive },
 ];
 
+const { role, setRole, toast } = useApp();
+
+const isManager = role === 'manager';
+
+const visibleNav = NAV
+  .filter((item) => !(isManager && item.to === '/drone-schedule'))
+  .map((item) => {
+    if (isManager && item.to === '/') {
+      return { ...item, l: 'لوحة المتابعة' };
+    }
+
+    if (isManager && item.to === '/tasks') {
+      return { ...item, l: 'متابعة المهام' };
+    }
+
+    return item;
+  });
+
 export default function AppLayout() {
   const { role, setRole, toast } = useApp();
   const [open, setOpen] = useState(false);
@@ -50,7 +68,7 @@ export default function AppLayout() {
           aria-label="القائمة الرئيسية"
           className="flex flex-col gap-1"
         >
-          {NAV.map((n) => (
+          {visibleNav.map((n) => (
             <NavLink
               key={n.to}
               to={n.to}
