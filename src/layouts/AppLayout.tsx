@@ -22,7 +22,9 @@ const NAV = [
   { to: '/history', l: 'سجل التفتيش', i: Archive },
 ];
 
-const { role, setRole, toast } = useApp();
+export default function AppLayout() {
+  const { role, setRole, toast } = useApp();
+  const [open, setOpen] = useState(false);
 
 const isManager = role === 'manager';
 // تحديث واجهة مدير المفتشين
@@ -40,10 +42,6 @@ const visibleNav = NAV
 
     return item;
   });
-
-export default function AppLayout() {
-  const { role, setRole, toast } = useApp();
-  const [open, setOpen] = useState(false);
 
   return (
     <div className="min-h-screen flex">
@@ -123,7 +121,7 @@ export default function AppLayout() {
       .filter((r) => ROLE_AR[r] !== 'جامع التقارير')
       .map((r) => (
         <option key={r} value={r}>
-          {ROLE_AR[r] === 'المدير' ? 'مدير المفتشين' : ROLE_AR[r]}
+          {ROLE_AR[r] === 'المدير' ? 'المدير' : ROLE_AR[r]}
         </option>
       ))}
   </select>

@@ -74,7 +74,7 @@ export default function ManagerDashboard() {
 
           <div>
             <h1 className="text-2xl font-bold">
-              واجهة المدير 
+            المدير 
             </h1>
 
             <p className="text-sm text-slate-400 mt-1">
