@@ -140,7 +140,7 @@ export default function ManagerDashboard() {
               value={taskType}
               onChange={(e) => setTaskType(e.target.value)}
             >
-              <option>تفتيش روتيني</option>
+              <option>تفتيش دوري</option>
               <option>تفتيش متابعة</option>
               <option>تفتيش بسبب تنبيه</option>
               <option>تفتيش إضافي</option>
