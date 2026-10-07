@@ -1,5 +1,6 @@
 import { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
+import ManagerDashboard from './ManagerDashboard';
 import {
   MapPin,
   ListChecks,
@@ -192,6 +193,12 @@ export default function Dashboard() {
       c: PIE[i],
     })
   );
+
+  if (role === 'manager') {
+  return <ManagerDashboard />;
+}
+
+
 
   const cat = Object.entries(
     findings.reduce<Record<string, number>>(
