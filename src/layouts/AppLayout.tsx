@@ -16,8 +16,8 @@ import type { Role } from '../types';
 
 const NAV = [
   { to: '/', l: 'لوحة التحكم', i: LayoutDashboard },
-  { to: '/tasks', l: 'المهام ومواقع التفتيش', i: ClipboardList },
-  { to: '/drone-schedule', l: 'جدولة الدرون', i: Plane },
+  { to: '/tasks', l: 'المهام', i: ClipboardList },
+  { to: '/drone-schedule', l: 'الجدولة', i: Plane },
   { to: '/reports', l: 'التقارير', i: FileText },
   { to: '/history', l: 'سجل التفتيش', i: Archive },
 ];
