@@ -25,6 +25,7 @@ const NAV = [
 const { role, setRole, toast } = useApp();
 
 const isManager = role === 'manager';
+// تحديث واجهة مدير المفتشين
 
 const visibleNav = NAV
   .filter((item) => !(isManager && item.to === '/drone-schedule'))
