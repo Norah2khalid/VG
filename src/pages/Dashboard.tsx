@@ -982,25 +982,130 @@ export default function Dashboard() {
 
           <div className="grid gap-3">
 
-            <div className="card border-amber-700">
+           <div className="card border-amber-700 space-y-3">
+  <div className="flex items-center gap-2">
+    <Bot size={18} className="text-cyan-300" />
 
-              <h3 className="font-semibold">
-                تحليل AI (تجريبي)
-              </h3>
+    <h3 className="font-semibold">
+      اتخاذ القرارات من خلال الذكاء الاصطناعي
+    </h3>
 
-              {f ? (
-                <p className="text-sm">
-                  {f.kind} — {f.equipment} —
-                  ثقة {f.confidence}%.
-                  هذه توصية آلية وليست قرار سلامة.
-                </p>
-              ) : (
-                <p className="text-slate-400 text-sm">
-                  لا توجد حالات
-                </p>
-              )}
+    <Sim>تجريبي</Sim>
+  </div>
 
-            </div>
+  {f ? (
+    <>
+      <div className="grid grid-cols-2 gap-2 text-sm">
+
+        <div className="bg-navy-900 rounded p-3">
+          <div className="text-xs text-slate-400">
+            الحالة المكتشفة
+          </div>
+          <div className="font-semibold mt-1">
+            {f.kind}
+          </div>
+        </div>
+
+        <div className="bg-navy-900 rounded p-3">
+          <div className="text-xs text-slate-400">
+            مستوى الخطورة
+          </div>
+          <div className="mt-1">
+            <RiskBadge risk={f.risk} />
+          </div>
+        </div>
+
+        <div className="bg-navy-900 rounded p-3">
+          <div className="text-xs text-slate-400">
+            درجة ثقة الذكاء الاصطناعي
+          </div>
+          <div className="font-semibold text-cyan-300 mt-1">
+            {f.confidence}%
+          </div>
+        </div>
+
+        <div className="bg-navy-900 rounded p-3">
+          <div className="text-xs text-slate-400">
+            القرار المقترح
+          </div>
+
+          <div className="font-semibold text-amber-300 mt-1">
+            {f.risk === 'critical' || f.risk === 'high'
+              ? 'طلب فحص إضافي'
+              : f.risk === 'medium'
+              ? 'إعادة التفتيش والمتابعة'
+              : 'اعتماد'}
+          </div>
+        </div>
+
+      </div>
+
+      <div className="border-t border-cyan-900/40 pt-3">
+        <div className="text-xs text-slate-400 mb-1">
+          توصية الذكاء الاصطناعي
+        </div>
+
+        <p className="text-sm leading-6">
+          بناءً على نتيجة تحليل الصورة ومستوى الخطورة ودرجة
+          الثقة، يقترح النظام الإجراء المناسب للمفتش للمراجعة
+          والاعتماد.
+        </p>
+      </div>
+
+      <div className="flex flex-wrap gap-2">
+
+        <button
+          className="btn"
+          onClick={() => {
+            const decision =
+              f.risk === 'critical' || f.risk === 'high'
+                ? 'طلب فحص إضافي'
+                : f.risk === 'medium'
+                ? 'إعادة التفتيش والمتابعة'
+                : 'اعتماد';
+
+            review(
+              f.id,
+              decision,
+              'قرار مقترح من الذكاء الاصطناعي'
+            );
+
+            notify('تم تسجيل القرار المقترح');
+          }}
+        >
+          اعتماد القرار المقترح
+        </button>
+
+        <button
+          className="btn2"
+          onClick={() =>
+            notify('تم رفض القرار المقترح')
+          }
+        >
+          رفض القرار
+        </button>
+
+        <button
+          className="btn2"
+          onClick={() =>
+            notify('تم طلب فحص إضافي')
+          }
+        >
+          فحص إضافي
+        </button>
+
+      </div>
+
+      <div className="text-xs text-amber-300 border-t border-amber-900/40 pt-2">
+        القرار المقترح مساعد للمفتش فقط، والاعتماد النهائي بيد المفتش.
+      </div>
+    </>
+  ) : (
+    <p className="text-slate-400 text-sm">
+      شغّل تحليل الصورة أولًا لإظهار القرار المقترح.
+    </p>
+  )}
+</div>
 
             <div className="card border-emerald-700">
 
