@@ -8,6 +8,7 @@ import {
   Menu,
   X,
   Activity,
+  Plane,
 } from 'lucide-react';
 
 import { useApp, ROLE_AR } from '../store';
@@ -16,6 +17,7 @@ import type { Role } from '../types';
 const NAV = [
   { to: '/', l: 'لوحة التحكم', i: LayoutDashboard },
   { to: '/tasks', l: 'المهام ومواقع التفتيش', i: ClipboardList },
+  { to: '/drone-schedule', l: 'جدولة الدرون', i: Plane },
   { to: '/reports', l: 'التقارير', i: FileText },
   { to: '/history', l: 'سجل التفتيش', i: Archive },
 ];
