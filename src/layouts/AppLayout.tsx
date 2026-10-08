@@ -3,6 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 import {
   LayoutDashboard,
   ClipboardList,
+  FileSearch,
   FileText,
   Archive,
   Menu,
@@ -17,6 +18,7 @@ import type { Role } from '../types';
 const NAV = [
   { to: '/', l: 'لوحة التحكم', i: LayoutDashboard },
   { to: '/tasks', l: 'المهام', i: ClipboardList },
+  { to: '/inspection', l: 'التفتيش', i: FileSearch },
   { to: '/drone-schedule', l: 'الجدولة', i: Plane },
   { to: '/reports', l: 'التقارير', i: FileText },
   { to: '/history', l: 'سجل التفتيش', i: Archive },
@@ -26,22 +28,24 @@ export default function AppLayout() {
   const { role, setRole, toast } = useApp();
   const [open, setOpen] = useState(false);
 
-const isManager = role === 'manager';
-// تحديث واجهة مدير المفتشين
+  const isManager = role === 'manager';
 
-const visibleNav = NAV
-  .filter((item) => !(isManager && item.to === '/drone-schedule'))
-  .map((item) => {
-    if (isManager && item.to === '/') {
-      return { ...item, l: 'لوحة المتابعة' };
-    }
+  const visibleNav = NAV
+    .filter(
+      (item) =>
+        !(isManager && item.to === '/drone-schedule')
+    )
+    .map((item) => {
+      if (isManager && item.to === '/') {
+        return { ...item, l: 'لوحة المتابعة' };
+      }
 
-    if (isManager && item.to === '/tasks') {
-      return { ...item, l: 'متابعة المهام' };
-    }
+      if (isManager && item.to === '/tasks') {
+        return { ...item, l: 'متابعة المهام' };
+      }
 
-    return item;
-  });
+      return item;
+    });
 
   return (
     <div className="min-h-screen flex">
@@ -58,8 +62,12 @@ const visibleNav = NAV
           />
 
           <div>
-            <div className="font-bold tracking-widest">VISIONGUARD</div>
-            <div className="text-xs text-slate-400">FISCB</div>
+            <div className="font-bold tracking-widest">
+              VISIONGUARD
+            </div>
+            <div className="text-xs text-slate-400">
+              FISCB
+            </div>
           </div>
         </div>
 
@@ -89,10 +97,16 @@ const visibleNav = NAV
 
         <div className="mt-auto card text-xs space-y-1">
           <div className="flex items-center gap-1">
-            <Activity size={14} className="text-emerald-400" />
+            <Activity
+              size={14}
+              className="text-emerald-400"
+            />
             حالة النظام: يعمل
           </div>
-          <div className="text-amber-300">وضع المحاكاة</div>
+
+          <div className="text-amber-300">
+            وضع المحاكاة
+          </div>
         </div>
       </aside>
 
@@ -103,7 +117,11 @@ const visibleNav = NAV
             aria-label="القائمة"
             onClick={() => setOpen(!open)}
           >
-            {open ? <X size={18} /> : <Menu size={18} />}
+            {open ? (
+              <X size={18} />
+            ) : (
+              <Menu size={18} />
+            )}
           </button>
 
           <div className="text-xs text-amber-300 border border-amber-700 rounded px-2 py-1">
@@ -111,21 +129,29 @@ const visibleNav = NAV
           </div>
 
           <label className="ms-auto text-xs text-slate-400 flex items-center gap-2">
-  الدور
-  <select
-    className="inp"
-    value={role}
-    onChange={(e) => setRole(e.target.value as Role)}
-  >
-    {(Object.keys(ROLE_AR) as Role[])
-      .filter((r) => ROLE_AR[r] !== 'جامع التقارير')
-      .map((r) => (
-        <option key={r} value={r}>
-          {ROLE_AR[r] === 'المدير' ? 'المدير' : ROLE_AR[r]}
-        </option>
-      ))}
-  </select>
-</label>
+            الدور
+
+            <select
+              className="inp"
+              value={role}
+              onChange={(e) =>
+                setRole(e.target.value as Role)
+              }
+            >
+              {(Object.keys(ROLE_AR) as Role[])
+                .filter(
+                  (r) =>
+                    ROLE_AR[r] !== 'جامع التقارير'
+                )
+                .map((r) => (
+                  <option key={r} value={r}>
+                    {ROLE_AR[r] === 'المدير'
+                      ? 'المدير'
+                      : ROLE_AR[r]}
+                  </option>
+                ))}
+            </select>
+          </label>
         </header>
 
         <main className="p-4 space-y-4">

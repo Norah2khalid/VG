@@ -475,13 +475,6 @@ export default function Dashboard() {
 
 
   const [busy, setBusy] = useState(false);
-  const [thermalTemp, setThermalTemp] = useState(78.4);
-  const [thermalStatus, setThermalStatus] = useState('Hot Spot مكتشف');
-  const [fieldDecision, setFieldDecision] = useState('بانتظار القرار');
-  const [aiDirection, setAiDirection] = useState('لم يتم توجيه النظارة بعد');
-
-
-
 
 
 
@@ -2123,77 +2116,6 @@ export default function Dashboard() {
 
 
 
-      </section>
-
-
-
-
-
-
-
-      
-      {/* Field Inspection - RealWear */}
-      <section className="card space-y-3 border-cyan-800">
-        <div className="flex flex-wrap items-center gap-2">
-          <h2 className="font-bold text-lg">التفتيش الميداني</h2>
-          <Sim>RealWear</Sim>
-          <span className="text-xs text-slate-400">Thermal Imaging Sensor / IR Camera</span>
-        </div>
-
-        <div className="grid lg:grid-cols-3 gap-3">
-          <div className="card bg-slate-950/50 border-cyan-900/60">
-            <div className="text-xs text-slate-400">جهاز التفتيش</div>
-            <div className="text-xl font-bold mt-1 text-cyan-300">RealWear</div>
-            <div className="text-sm text-slate-300 mt-2">نظارة التفتيش الميداني للمفتش، مرتبطة بمنظومة VisionGuard.</div>
-            <div className="text-xs text-slate-400 mt-3">الحساس: Thermal Imaging Sensor / IR Camera</div>
-            <div className="text-xs text-slate-400 mt-1">مثال لوحدة التصوير الحراري: FLIR المتوافقة مع RealWear.</div>
-          </div>
-
-          <div className="card bg-slate-950/50 border-amber-900/60">
-            <div className="text-xs text-slate-400">القراءة الحرارية</div>
-            <div className="text-3xl font-bold mt-1 text-amber-300">{thermalTemp.toFixed(1)}°C</div>
-            <div className="grid grid-cols-2 gap-2 mt-3 text-xs">
-              <div className="bg-navy-900 rounded p-2"><div className="text-slate-400">أعلى قراءة</div><div className="font-semibold mt-1">91.2°C</div></div>
-              <div className="bg-navy-900 rounded p-2"><div className="text-slate-400">أدنى قراءة</div><div className="font-semibold mt-1">64.7°C</div></div>
-            </div>
-            <div className="text-xs mt-3 text-amber-300">{thermalStatus}</div>
-            <div className="text-xs text-slate-400 mt-1">نقطة القياس: Pump P-04</div>
-          </div>
-
-          <div className="card bg-slate-950/50 border-emerald-900/60">
-            <div className="text-xs text-slate-400">الصورة الحرارية</div>
-            <div className="h-32 mt-2 rounded-lg border border-amber-700/50 bg-gradient-to-br from-slate-800 via-red-900/70 to-amber-300/40 grid place-items-center">
-              <div className="text-center"><div className="font-bold text-amber-200">THERMAL VIEW</div><div className="text-xs text-slate-300 mt-1">عرض الصورة أمام المفتش</div></div>
-            </div>
-            <div className="text-xs text-slate-400 mt-2">يتم إرسال القراءة والصورة الحرارية إلى VisionGuard وربطها بالمعدة ومهمة التفتيش.</div>
-          </div>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-3">
-          <div className="card border-cyan-900/60">
-            <h3 className="font-semibold mb-2">قرار الذكاء الاصطناعي</h3>
-            <p className="text-sm text-slate-300 leading-6">يحلل VisionGuard القراءة الحرارية والحالة المرصودة ويقترح الإجراء المناسب للمفتش. عند الحاجة يمكن للنظام توجيه أمر فحص إضافي إلى نظارة RealWear.</p>
-            <div className="mt-3 rounded bg-navy-900 p-3 text-sm">
-              <div className="text-xs text-slate-400">التوصية الحالية</div>
-              <div className="font-semibold text-amber-300 mt-1">حرارة غير طبيعية — يوصى بفحص إضافي</div>
-              <div className="text-xs text-cyan-300 mt-2">{aiDirection}</div>
-            </div>
-            <button className="btn mt-3" onClick={() => { setAiDirection('تم توجيه RealWear لفحص Pump P-04 وإعادة قراءة المنطقة الحرارية'); notify('تم إرسال توجيه AI إلى نظارة RealWear'); }}>توجيه النظارة للفحص</button>
-          </div>
-
-          <div className="card border-emerald-900/60">
-            <h3 className="font-semibold mb-2">القرار البشري</h3>
-            <p className="text-sm text-slate-300 leading-6">يبقى القرار النهائي بيد المفتش، ويمكنه اعتماد الحالة أو طلب فحص إضافي أو تحويلها للصيانة.</p>
-            <div className="flex flex-wrap gap-2 mt-3">
-              {['اعتماد الحالة', 'فحص إضافي', 'تحويل للصيانة'].map((a) => (
-                <button key={a} className="btn2" onClick={() => { setFieldDecision(a); notify(`تم تسجيل القرار: ${a}`); }}>{a}</button>
-              ))}
-            </div>
-            <div className="text-xs text-emerald-300 mt-3">القرار الحالي: {fieldDecision}</div>
-          </div>
-        </div>
-
-        <div className="text-xs text-slate-400 border-t border-cyan-900/40 pt-3">قياس الضغط الداخلي للأنابيب والخزانات لا يتم بواسطة النظارة الحرارية، ويحتاج جهاز ضغط مخصص. تم استبعاد قياس الضغط من RealWear والاعتماد على بيانات الضغط القادمة من منظومة الدرون عند توفرها.</div>
       </section>
 
 {/* Imaging */}
