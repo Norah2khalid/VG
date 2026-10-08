@@ -7,7 +7,7 @@ decisions:HumanDecision[];review:(id:string,decision:string,note:string)=>void;r
 inspections:Inspection[];completeInspection:(taskId:string)=>void;toast:string;notify:(m:string)=>void}
 const Ctx=createContext<S>(null as unknown as S);export const useApp=()=>useContext(Ctx);
 export function AppProvider({children}:{children:ReactNode}){
-const [role,setRole]=useState<Role>('manager');const [tasks,setTasks]=useState(TASKS);const [findings,setFindings]=useState(FINDINGS);
+const [role,setRole]=useState<Role>('inspector');const [tasks,setTasks]=useState(TASKS);const [findings,setFindings]=useState(FINDINGS);
 const [decisions,setDecisions]=useState<HumanDecision[]>([]);const [reports,setReports]=useState(REPORTS);const [inspections,setInsp]=useState(INSPECTIONS);const [toast,setToast]=useState('');
 const notify=(m:string)=>{setToast(m);setTimeout(()=>setToast(''),3000)};
 const saveTask=(t:InspectionTask)=>{setTasks(p=>p.some(x=>x.id===t.id)?p.map(x=>x.id===t.id?t:x):[t,...p]);notify('تم حفظ المهمة')};

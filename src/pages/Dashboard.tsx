@@ -6,10 +6,6 @@ import { Link } from 'react-router-dom';
 
 
 
-import ManagerDashboard from './ManagerDashboard';
-
-
-
 import {
 
 
@@ -805,36 +801,6 @@ export default function Dashboard() {
 
 
   );
-
-
-
-
-
-
-
-  if (role === 'manager') {
-
-
-
-  return <ManagerDashboard />;
-
-
-
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
   const cat = Object.entries(
 
