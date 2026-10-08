@@ -11,8 +11,7 @@ import {
   Plane,
 } from 'lucide-react';
 
-import { useApp, ROLE_AR } from '../store';
-import type { Role } from '../types';
+import { useApp } from '../store';
 
 const NAV = [
   { to: '/', l: 'لوحة التحكم', i: LayoutDashboard },
@@ -23,27 +22,8 @@ const NAV = [
 ];
 
 export default function AppLayout() {
-  const { role, setRole, toast } = useApp();
+  const { toast } = useApp();
   const [open, setOpen] = useState(false);
-
-  const isManager = role === 'manager';
-
-  const visibleNav = NAV
-    .filter(
-      (item) =>
-        !(isManager && item.to === '/drone-schedule')
-    )
-    .map((item) => {
-      if (isManager && item.to === '/') {
-        return { ...item, l: 'لوحة المتابعة' };
-      }
-
-      if (isManager && item.to === '/tasks') {
-        return { ...item, l: 'متابعة المهام' };
-      }
-
-      return item;
-    });
 
   return (
     <div className="min-h-screen flex">
@@ -63,6 +43,7 @@ export default function AppLayout() {
             <div className="font-bold tracking-widest">
               VISIONGUARD
             </div>
+
             <div className="text-xs text-slate-400">
               FISCB
             </div>
@@ -73,7 +54,7 @@ export default function AppLayout() {
           aria-label="القائمة الرئيسية"
           className="flex flex-col gap-1"
         >
-          {visibleNav.map((n) => (
+          {NAV.map((n) => (
             <NavLink
               key={n.to}
               to={n.to}
@@ -125,31 +106,6 @@ export default function AppLayout() {
           <div className="text-xs text-amber-300 border border-amber-700 rounded px-2 py-1">
             وضع المحاكاة — بيانات تجريبية
           </div>
-
-          <label className="ms-auto text-xs text-slate-400 flex items-center gap-2">
-            الدور
-
-            <select
-              className="inp"
-              value={role}
-              onChange={(e) =>
-                setRole(e.target.value as Role)
-              }
-            >
-              {(Object.keys(ROLE_AR) as Role[])
-                .filter(
-                  (r) =>
-                    ROLE_AR[r] !== 'جامع التقارير'
-                )
-                .map((r) => (
-                  <option key={r} value={r}>
-                    {ROLE_AR[r] === 'المدير'
-                      ? 'المدير'
-                      : ROLE_AR[r]}
-                  </option>
-                ))}
-            </select>
-          </label>
         </header>
 
         <main className="p-4 space-y-4">
